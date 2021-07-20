@@ -22,7 +22,8 @@ async def on_message(message):
 
     msgcon=[]
     msgcon=message.content.split(" ")
-    if "niv" in msgcon or "nivesh" in msgcon:
+    caplist=[i.upper() for i in msgcon]
+    if "NIV" in caplist or "NIVESH" in caplist or "NIVI" in caplist :
         await message.reply("Nivesh ? he is a pro but an agent hopper.")
              
     if message.content.startswith('$echo'):
@@ -32,8 +33,9 @@ async def on_message(message):
         for i in range(1,len(msgcon)):
             string+=msgcon[i]+" "
         await message.reply(string)
-    
-    if messag.content.startswith('$update'):
+    if message.content.startswith('$ping'):
+        await message.channel.send("Pong!")
+    if message.content.startswith('$update'):
         retval=subprocess.call(["./update.sh"])
         if retval=="0":
             await message.channel.send("No diff to update or merge.")
