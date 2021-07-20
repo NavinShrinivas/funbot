@@ -1,10 +1,10 @@
 #!/bin/bash 
 
-git remote update
+git remote update > /dev/null
 
-dryrunret='git pull --dry-run'
-if ['$dryrunret'=="Already up-to-date."]
-    echo "upto date"
+if [ "$(git rev-parse HEAD)" = "$(git rev-parse @{u})" ];
+then
+    return "0"//no need of update
 else
-    echo "need to update"
+    return "1"
 fi

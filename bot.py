@@ -35,10 +35,11 @@ async def on_message(message):
     
     if messag.content.startswith('$update'):
         retval=subprocess.call(["./update.sh"])
-        if retval==0:
+        if retval=="0":
             await message.channel.send("No diff to update or merge.")
         else:
             await message.channel.send("Changes present , Updating...Will notify once done!")
+
         
 
 client.run(TOKEN)
